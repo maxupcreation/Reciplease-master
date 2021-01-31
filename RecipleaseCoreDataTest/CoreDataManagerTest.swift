@@ -41,6 +41,12 @@ final class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(coreDataManager.favorite.isEmpty)
     }
     
+    func testRegisteredMethod_WhenAnEntityIsRegistered_ThenShouldBeReturnFalse() {
+        coreDataManager.createFavorite(label: "test", calories: "10", image: UIImage(named: "default")!, ingredients: ["ingredientsTest"], totalTime: "totalTime", yield: "yield", url: "url")
+        
+        
+        XCTAssertTrue(coreDataManager.isRecipeRegistered(name: "test"))
+    }
     
     
     
