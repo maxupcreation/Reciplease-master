@@ -44,7 +44,7 @@ class RecipeDetailsViewController: UIViewController {
     
     //X
     
-   private var calorieForCoreData: String?
+    private var calorieForCoreData: String?
     
     var nameCoreArray : [String]?
     
@@ -105,7 +105,7 @@ class RecipeDetailsViewController: UIViewController {
         
         //— 💡 If the button is selected, change the image then create the favorite in the database.
         
-        if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text! ) == false {
+        if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text ?? "" ) == false {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
             
@@ -117,8 +117,8 @@ class RecipeDetailsViewController: UIViewController {
             
             coreDataManager?.createFavorite (
                 label: dataRecipeIndexPath!.label,
-                calories: calorieLabel.text!,
-                image: recipeImageView.image!,
+                calories: calorieLabel.text ?? "no calories",
+                image: recipeImageView.image ?? UIImage(imageLiteralResourceName: "default"),
                 ingredients: ingredientsArrayEmpty,
                 totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + " min",
                 yield: "",
@@ -195,9 +195,8 @@ class RecipeDetailsViewController: UIViewController {
         
         nameRecipeLabel.text = favoriteCoreIndex?.label
         
-         let imageViewFavoriteCore = UIImage(data: (favoriteCoreIndex?.image)!)
+        let imageViewFavoriteCore = UIImage(data: (favoriteCoreIndex?.image)!)
         recipeImageView.image = imageViewFavoriteCore
-        //Mettre une image ?? par défaut.
         recipeImageView.contentMode = .scaleAspectFill
         
         let ingredientsJoinged = favoriteCoreIndex?.ingredients?.joined(separator: "\n - ") ?? "no Data Ingredients"
@@ -206,7 +205,7 @@ class RecipeDetailsViewController: UIViewController {
         
         timeLabel.text = favoriteCoreIndex?.totalTime ?? "No time Data"
         
-
+        
         calorieLabel.text = favoriteCoreIndex?.calories
         
     }

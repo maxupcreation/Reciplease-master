@@ -55,17 +55,17 @@
         enum RecipeError: Error, CustomStringConvertible {
             
             case noData, invalidResponse, undecodableData
-       
-        var description:String{
-            switch self {
-            case .noData:
-                return "There is no data !"
-            case .invalidResponse:
-                return "Response status is incorrect !"
-            case .undecodableData:
-                return "Data can't be decoded !"
+            
+            var description:String{
+                switch self {
+                case .noData:
+                    return "There is no data !"
+                case .invalidResponse:
+                    return "Response status is incorrect !"
+                case .undecodableData:
+                    return "Data can't be decoded !"
+                }
             }
-        }
             
         }
         

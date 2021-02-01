@@ -52,7 +52,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         //— ❗ Allows to update ingredients
         
         serviceIngredientsFridge = ServiceIngredientsFridge()
-   
+        
         ingredientsTableView.reloadData()
         
     }

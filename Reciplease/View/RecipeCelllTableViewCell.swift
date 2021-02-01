@@ -25,7 +25,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-      
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -72,12 +72,13 @@ class RecipeCelllTableViewCell: UITableViewCell {
         titleLabel.text = coreDataRecipe.label
         timeLabel.text = coreDataRecipe.totalTime
         
-       
         ingredientsLabel.text = coreDataRecipe.ingredients![0]
         calorieLabel.text = coreDataRecipe.calories
-        recipeImageView.image = UIImage(data: coreDataRecipe.image!)
+        
+        let imageDefaultData = UIImage(imageLiteralResourceName: "default").pngData()
+        
+        recipeImageView.image = UIImage(data: coreDataRecipe.image ?? imageDefaultData!)
         recipeImageView.contentMode = .scaleAspectFill
         
     }
-
 }

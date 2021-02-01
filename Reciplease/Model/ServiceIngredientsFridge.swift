@@ -10,12 +10,12 @@ import Foundation
 
 class ServiceIngredientsFridge {
     
-
+    
     var ingredientsFridge : [String] = []
-
-        
-        func addIngredients(ingredients:String) {
-            ingredientsFridge.append(ingredients)
-        }
+    
+    
+    func addIngredients(ingredients:String) {
+        ingredientsFridge.append(ingredients)
     }
+}
 
