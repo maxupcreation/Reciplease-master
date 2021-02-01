@@ -52,8 +52,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         //— ❗ Allows to update ingredients
         
         serviceIngredientsFridge = ServiceIngredientsFridge()
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-//        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
+        //        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        //        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
         //X
         
@@ -68,8 +68,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
-        //coreDataManager?.deleteAllIgredient()
-       // serviceIngredientsFridge.ingredientsFridge.removeAll()
+        
+        serviceIngredientsFridge?.ingredientsFridge.removeAll()
         ingredientsTableView.reloadData()
     }
     
@@ -91,12 +91,13 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
                 if self.serviceIngredientsFridge?.ingredientsFridge.count ?? 0 > 0 {
                     self.dataRecipe = data
                     self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
-                
+                    
                 } else {
                     self.displayNeedIngredientsAlert()
                 }
                 
             case .failure(let error):
+                self.displayIngredientsUnknow()
                 print(error)
             }
         }
@@ -122,12 +123,14 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
                 //coreDataManager?.createIngredients(ingredient: ingredients)
                 
                 serviceIngredientsFridge?.addIngredients(ingredients: ingredients)
-        
+                
                 ingredientsTableView.reloadData()
                 ingredientsTextField.text = ""
             }
         }
     }
+    
+    //MARK:- Alerts 🚨
     
     func displayNeedIngredientsAlert() {
         let alertController = UIAlertController(title: "Add ingredients to find recipes", message: "", preferredStyle: .alert)
@@ -137,6 +140,17 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         alertController.addAction(addAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func displayIngredientsUnknow() {
+        let alertController = UIAlertController(title: "Your ingredients are unknow", message: "", preferredStyle: .alert)
+        
+        let addAction = UIAlertAction(title: "Ok", style: .default)
+        
+        
+        alertController.addAction(addAction)
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     
@@ -236,7 +250,7 @@ extension SearchViewController:UITableViewDelegate {
         
         if editingStyle == .delete {
             
-            //ingredientsData?.ingredients(indexPath: indexPath)
+            serviceIngredientsFridge?.ingredientsFridge.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             

@@ -8,6 +8,7 @@ final class CoreDataManagerTests: XCTestCase {
 
     var coreDataStack: MockCoreDataStack!
     var coreDataManager: CoreDataManager!
+    var serviceIngredientsFridge : ServiceIngredientsFridge!
 
     // MARK: - Tests Life Cycle
 
@@ -15,12 +16,14 @@ final class CoreDataManagerTests: XCTestCase {
         super.setUp()
         coreDataStack = MockCoreDataStack()
         coreDataManager = CoreDataManager(coreDataStack: coreDataStack)
+        serviceIngredientsFridge = ServiceIngredientsFridge()
     }
 
     override func tearDown() {
         super.tearDown()
         coreDataManager = nil
         coreDataStack = nil
+        serviceIngredientsFridge = nil
     }
 
     // MARK: - Tests
@@ -46,6 +49,15 @@ final class CoreDataManagerTests: XCTestCase {
         
         
         XCTAssertTrue(coreDataManager.isRecipeRegistered(name: "test"))
+    }
+    
+    func testAddFridgeIngredientsMethod_WhenAnIngredientsIsAppend_ThenShouldArrayIsNotEmpty() {
+        
+    
+        serviceIngredientsFridge.addIngredients(ingredients: "ingredient")
+        
+        XCTAssertFalse(serviceIngredientsFridge.ingredientsFridge.isEmpty)
+        
     }
     
     
