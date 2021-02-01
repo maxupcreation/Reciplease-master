@@ -52,11 +52,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         //— ❗ Allows to update ingredients
         
         serviceIngredientsFridge = ServiceIngredientsFridge()
-        //        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        //        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
-        
-        //X
-        
+   
         ingredientsTableView.reloadData()
         
     }
@@ -258,6 +254,8 @@ extension SearchViewController:UITableViewDelegate {
         }
     }
 }
+
+//— 💡 Text control in the textField to add ingredients
 
 extension String {
     

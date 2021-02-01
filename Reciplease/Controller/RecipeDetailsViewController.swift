@@ -59,18 +59,12 @@ class RecipeDetailsViewController: UIViewController {
     override func viewDidLoad() {
         
         
-        infosStackView.layer.cornerRadius = CGFloat(7)
-        infosStackView.layer.masksToBounds = true
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "", style: .plain, target: nil, action: nil)
-        
         //— ❗ Allows to update CoreData
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
-        //X
+        //— 💡 If there is an element in the favorites, the API data is used, otherwise the CoreData data is used.
         
         if coreDataManager?.isRecipeRegistered(name: favoriteCoreIndex?.label ?? "no data") == false {
             
@@ -81,6 +75,14 @@ class RecipeDetailsViewController: UIViewController {
             configureWithCoreData()
             
         }
+        
+        //X
+        
+        infosStackView.layer.cornerRadius = CGFloat(7)
+        infosStackView.layer.masksToBounds = true
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "", style: .plain, target: nil, action: nil)
     }
     
     
@@ -208,7 +210,4 @@ class RecipeDetailsViewController: UIViewController {
         calorieLabel.text = favoriteCoreIndex?.calories
         
     }
-    
-    //MARK:- Conditions☝🏻
-    
 }

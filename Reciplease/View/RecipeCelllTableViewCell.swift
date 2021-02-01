@@ -61,9 +61,8 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         //— 💡 Load Image
         
-        let recipeImage = dataRecipe.image!
+        let recipeImage = dataRecipe.image ?? "default"
         recipeImageView.sd_setImage(with: URL(string:recipeImage))
-        //rajouter une image par défaut
         
         //X
     }
@@ -82,19 +81,3 @@ class RecipeCelllTableViewCell: UITableViewCell {
     }
 
 }
-
-////— 💡 extension for load image with Url
-//
-//extension UIImageView {
-//    func load(url: URL) {
-//        DispatchQueue.global().async { [weak self] in
-//            if let data = try? Data(contentsOf: url) {
-//                if let image = UIImage(data: data) {
-//                    DispatchQueue.main.async {
-//                        self?.image = image
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
