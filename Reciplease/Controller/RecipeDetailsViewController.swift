@@ -35,17 +35,11 @@ class RecipeDetailsViewController: UIViewController {
     // self <- ResultSearchController
     
     var dataRecipeIndexPath : Recipe?
-    
     var favoriteCoreIndex : FavoriteRecipe?
-    
-    //— 💡 *UrlGetDirectionButton
-    
-    var urlRecipeString : String?
     
     //X
     
     private var calorieForCoreData: String?
-    
     var nameCoreArray : [String]?
     
     //— 💡 Manage CoreData Entity
@@ -71,9 +65,7 @@ class RecipeDetailsViewController: UIViewController {
             configureWithApi()
             
         } else {
-            
             configureWithCoreData()
-            
         }
         
         //X
@@ -93,22 +85,18 @@ class RecipeDetailsViewController: UIViewController {
         if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text!) == true {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
-        } else {  favoriteItemButton.image = UIImage(systemName: "star") }
-        
-        
+        } else {  favoriteItemButton.image = UIImage(systemName: "star")
+        }
     }
     
     //MARK:- Button Action 🔴
     
     @IBAction func tapedStarButton(_ sender: Any) {
-        
-        
         //— 💡 If the button is selected, change the image then create the favorite in the database.
         
         if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text ?? "" ) == false {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
-            
             var ingredientsArrayEmpty : [String] = []
             
             for ingredientArray in dataRecipeIndexPath!.ingredients {
@@ -122,14 +110,13 @@ class RecipeDetailsViewController: UIViewController {
                 ingredients: ingredientsArrayEmpty,
                 totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + " min",
                 yield: "",
-                url: urlRecipeString!)
+                url: dataRecipeIndexPath?.url ?? "No data")
             
         }
         
         //— 💡 else change the image and delete the favorite from the database.
         
         else {
-            
             favoriteItemButton.image = UIImage(systemName: "star")
             coreDataManager?.ifRecipeRegisteredThenDeleteFavorite(name: nameRecipeLabel.text!)
         }
@@ -139,7 +126,7 @@ class RecipeDetailsViewController: UIViewController {
         
         //— 💡 Open the recipe url in a browser. *UrlGetDirectionButton
         
-        if let url = URL(string: urlRecipeString ?? "") {
+        if let url = URL(string: dataRecipeIndexPath?.url ?? "no data url") {
             UIApplication.shared.open(url)
         } else { return }
     }
@@ -173,29 +160,30 @@ class RecipeDetailsViewController: UIViewController {
         ingredientsTextView.text = ingredients
         
         //— 💡 Converted the data "calories" with a number 1 after the decimal point for CoreData.
-        
         let calorie = dataRecipeIndexPath!.calories
         let formated = String(format: "%.1f cal", calorie)
         calorieForCoreData = formated
         calorieLabel.text = formated
-        
         //X
-        
         recipeImageView.contentMode = .scaleAspectFill
-        
-        //— 💡 The url for passenger the data to the button "Get direction". *UrlGetDirectionButton
-        
-        urlRecipeString = dataRecipeIndexPath?.url
-        
-        //X
-        
     }
     
     func configureWithCoreData() {
         
-        nameRecipeLabel.text = favoriteCoreIndex?.label
         
-        let imageViewFavoriteCore = UIImage(data: (favoriteCoreIndex?.image)!)
+        func imageData() -> Data {
+            let imageDefault = UIImage(imageLiteralResourceName: "default")
+            let imageDefaultData = imageDefault.pngData()!
+            guard let imageDataCore = favoriteCoreIndex?.image else {            return imageDefaultData
+            }
+            return imageDataCore
+        }
+        
+        nameRecipeLabel.text = favoriteCoreIndex?.label
+    
+        
+        let imageViewFavoriteCore = UIImage(data: imageData())
+                                            
         recipeImageView.image = imageViewFavoriteCore
         recipeImageView.contentMode = .scaleAspectFill
         
@@ -204,7 +192,6 @@ class RecipeDetailsViewController: UIViewController {
         ingredientsTextView.text = "-" + " " + ingredientsJoinged
         
         timeLabel.text = favoriteCoreIndex?.totalTime ?? "No time Data"
-        
         
         calorieLabel.text = favoriteCoreIndex?.calories
         

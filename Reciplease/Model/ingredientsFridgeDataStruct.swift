@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct IngredientsFridge {
+struct IngredientsFridgeDataStruct {
     var ingredients : String
 }

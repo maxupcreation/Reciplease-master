@@ -116,7 +116,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         let ingredients = ingredientsTextField.text ?? ""
         if ingredients != "" {
             if ingredients.containsValidCharacter == true {
-                //coreDataManager?.createIngredients(ingredient: ingredients)
                 
                 serviceIngredientsFridge?.addIngredients(ingredients: ingredients)
                 
@@ -252,18 +251,6 @@ extension SearchViewController:UITableViewDelegate {
             
             tableView.reloadData()
         }
-    }
-}
-
-//— 💡 Text control in the textField to add ingredients
-
-extension String {
-    
-    var containsValidCharacter: Bool {
-        guard self != "" else { return true }
-        let hexSet = CharacterSet(charactersIn: "abdcdefghijklmnopqrstuvwxyz")
-        let newSet = CharacterSet(charactersIn: self)
-        return hexSet.isSuperset(of: newSet)
     }
 }
 

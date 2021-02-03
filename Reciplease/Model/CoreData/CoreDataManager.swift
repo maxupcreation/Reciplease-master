@@ -19,7 +19,6 @@ final class CoreDataManager {
     
     var favorite: [FavoriteRecipe] {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
-        //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         guard let favorite = try? managedObjectContext.fetch(request) else { return [] }
         return favorite
     }
