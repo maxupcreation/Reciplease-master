@@ -59,8 +59,4 @@ final class CoreDataManagerTests: XCTestCase {
         XCTAssertFalse(serviceIngredientsFridge.ingredientsFridge.isEmpty)
         
     }
-    
-    
-    
-    
 }
