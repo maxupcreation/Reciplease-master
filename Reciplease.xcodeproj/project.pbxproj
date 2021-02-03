@@ -253,6 +253,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9CE19B2D25CAD17800013027 /* PBXTargetDependency */,
 				9C00211625C3035B0075430C /* PBXTargetDependency */,
 			);
 			name = RecipleaseTestsOk;
@@ -453,6 +454,10 @@
 			isa = PBXTargetDependency;
 			target = 9C945CD4259A49EA00D7F7B3 /* Reciplease */;
 			targetProxy = 9C00211525C3035B0075430C /* PBXContainerItemProxy */;
+		};
+		9CE19B2D25CAD17800013027 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9CE19B2C25CAD17800013027 /* SDWebImage */;
 		};
 /* End PBXTargetDependency section */
 
@@ -733,6 +738,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C41DEFB25B5E44300CB65C4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		9CE19B2C25CAD17800013027 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C41DEFB25B5E44300CB65C4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

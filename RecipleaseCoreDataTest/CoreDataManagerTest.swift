@@ -28,14 +28,14 @@ final class CoreDataManagerTests: XCTestCase {
 
     // MARK: - Tests
 
-    func testAddTeskMethods_WhenAnEntityIsCreated_ThenShouldBeCorrectlySaved() {
+    func testAddFavoriteMethods_WhenAnEntityIsCreated_ThenShouldBeCorrectlySaved() {
         coreDataManager.createFavorite(label: "test", calories: "10", image: UIImage(named: "default")!, ingredients: ["ingredientsTest"], totalTime: "totalTime", yield: "yield", url: "url")
         XCTAssertTrue(!coreDataManager.favorite.isEmpty)
         XCTAssertTrue(coreDataManager.favorite.count == 1)
         XCTAssertTrue(coreDataManager.favorite.first?.label == "test")
     }
 
-    func testDeleteAllTasksMethod_WhenAnEntityIsCreated_ThenShouldBeCorrectlyDeleted() {
+    func testDeleteFavoriteMethod_WhenAnEntityIsCreated_ThenShouldBeCorrectlyDeleted() {
         
         coreDataManager.createFavorite(label: "test", calories: "10", image: UIImage(named: "default")!, ingredients: ["ingredientsTest"], totalTime: "totalTime", yield: "yield", url: "url")
         
